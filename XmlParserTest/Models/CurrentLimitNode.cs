@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace XmlParserTest
+﻿namespace XmlParserTest
 {
     class CurrentLimitNode : Node
     {
@@ -26,7 +22,7 @@ namespace XmlParserTest
             if(line.StartsWith("<cim:CurrentLimit.value>"))
             {
                 Value = ParseValue(line);
-;           }
+            }
         }
     }
 }
