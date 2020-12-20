@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,15 @@ namespace XmlParserTest
         public NodesRepository(StreamReader reader, NodeMediator mediator)
         {
             _reader = reader;
+            
+            if (reader == null)
+                throw new ArgumentNullException(nameof(reader));
+
             _mediator = mediator;
+            
+            if (mediator == null)
+                throw new ArgumentNullException(nameof(mediator));
+
             _rootNodes = new Dictionary<string, Node>();
         }
 
@@ -41,11 +50,10 @@ namespace XmlParserTest
 
             StringBuilder result = new StringBuilder();
             
-            result.Append("[");
-
-            result.AppendJoin(',', nodes);
-
-            result.Append("]");
+            result
+                .Append("[")
+                .AppendJoin(',', nodes)
+                .Append("]");
 
             return result.ToString();
         }

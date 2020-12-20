@@ -19,10 +19,11 @@ namespace XmlParserTest
 
             if (Parent == null)
             {
-                sb.Append("{")
-                  .Append($"\"{Name}\":");
+
 
                 return sb
+                        .Append("{")
+                        .Append($"\"{Name}\":")
                         .Append("{")
                         .AppendJoin(',', Chldren)
                         .Append("}")
