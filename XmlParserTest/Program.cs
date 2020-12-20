@@ -38,12 +38,11 @@ namespace XmlParserTest
                     
                 node.CollectNodes();
                 
-                
                 var s = node?.ToJson();
                 
                 watch.Stop();
                 
-                var time = $"Время выполенения: {watch.ElapsedMilliseconds} мс";
+                var time = $"Время выполнения: {watch.ElapsedMilliseconds} мс";
 
                 Console.WriteLine(s);
                 Console.WriteLine();
