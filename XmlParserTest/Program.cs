@@ -38,15 +38,22 @@ namespace XmlParserTest
                     
                 node.CollectNodes();
                 
-                var s = node?.ToJson();
+                var resultString = node?.ToJson();
                 
                 watch.Stop();
                 
                 var time = $"Время выполнения: {watch.ElapsedMilliseconds} мс";
 
-                Console.WriteLine(s);
+                Console.WriteLine(resultString);
                 Console.WriteLine();
                 Console.WriteLine(time);
+
+                using (var writer = File.CreateText("result.json"))
+                {
+                    writer.Write(resultString);
+                    writer.Flush();
+                    writer.Close();
+                }
 
                 Console.ReadLine();
 
