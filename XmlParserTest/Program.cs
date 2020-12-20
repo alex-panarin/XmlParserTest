@@ -32,6 +32,7 @@ namespace XmlParserTest
                         new KeyValuePair<string, Func<string, Node>>("cim:VoltageLevel", (s) => new VoltageNode(s)),
                         new KeyValuePair<string, Func<string, Node>>("cim:SynchronousMachine", (s) => new MachineNode(s)),
                         //new KeyValuePair<string, Func<string, Node>>("cim:OperationalLimitSet", (s) => new LimitSetNode(s)), // Можно подключать и отключать Ноды
+                        //new KeyValuePair<string, Func<string, Node>>("cim:CurrentLimit", (s) => new CurrentLimitNode(s)), // Можно подключать и отключать Ноды
                 };
 
                 node = new NodesRepository(reader, new NodeMediator(templates));

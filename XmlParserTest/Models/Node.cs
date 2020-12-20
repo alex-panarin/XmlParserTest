@@ -12,7 +12,7 @@ namespace XmlParserTest
             Key = ParseKey(line);
         }
 
-        public virtual void Parse(StreamReader reader, NodesRepository repository)
+        public void Parse(StreamReader reader, NodesRepository repository)
         {
             while (!reader.EndOfStream)
             {
@@ -28,6 +28,8 @@ namespace XmlParserTest
                 {
                     Parent = ParseKey(line);
                 }
+
+                ParseInternal(line);
 
                 if (line.StartsWith($"</{Template}>"))
                 {
@@ -48,6 +50,10 @@ namespace XmlParserTest
         public string Name { get; protected set; }
         public string Parent { get; protected set; }
 
+        protected virtual void ParseInternal(string line)
+        {
+
+        }
         protected virtual string ParentTemplate => null;
         protected virtual string Template => null;
         protected virtual string ParseKey(string line)
