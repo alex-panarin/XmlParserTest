@@ -25,7 +25,7 @@ namespace XmlParserTest
         {
             if(line.StartsWith("<cim:CurrentLimit.value>"))
             {
-                Value = ParseValue(line)
+                Value = ParseValue(line);
 ;           }
         }
     }
