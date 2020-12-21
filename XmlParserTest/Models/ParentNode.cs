@@ -17,7 +17,7 @@ namespace XmlParserTest
         {
             StringBuilder sb = new StringBuilder();
 
-            if (Parent == null)
+            if (! HasParent)
             {
 
 

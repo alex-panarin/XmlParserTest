@@ -21,12 +21,14 @@ namespace XmlParserTest
                 if (line.StartsWith($"<{nameTemplate}>"))
                 {
                     Name = ParseValue(line);
+                    continue;
                 }
 
                 if (!string.IsNullOrEmpty(ParentTemplate)
                     && line.StartsWith($"<{ParentTemplate} "))
                 {
                     Parent = ParseKey(line);
+                    continue;
                 }
 
                 ParseInternal(line);
