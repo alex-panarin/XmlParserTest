@@ -3,18 +3,17 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.MemoryMappedFiles;
+using System.Threading.Tasks;
 
 namespace XmlParserTest
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main()
         {
             try
             {
                 Stopwatch watch = new Stopwatch();
-
-                NodesRepository node;
 
                 watch.Start();
 
@@ -35,11 +34,11 @@ namespace XmlParserTest
                         //new KeyValuePair<string, Func<string, Node>>("cim:CurrentLimit", (s) => new CurrentLimitNode(s)), // Можно подключать и отключать Ноды
                 };
 
-                node = new NodesRepository(reader, new NodeMediator(templates));
+                NodesRepository node = new NodesRepository(reader, new NodeMediator(templates));
                     
-                node.CollectNodes();
+                await node.CollectNodes();
                 
-                var resultString = node?.ToJson();
+                var resultString = node.ToJson();
                 
                 watch.Stop();
                 

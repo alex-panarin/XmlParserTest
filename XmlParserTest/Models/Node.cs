@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace XmlParserTest
 {
@@ -12,11 +13,13 @@ namespace XmlParserTest
             Key = ParseKey(line);
         }
 
-        public void Parse(StreamReader reader, NodesRepository repository)
+        public async Task Parse(StreamReader reader, NodesRepository repository)
         {
             while (!reader.EndOfStream)
             {
-                var line = reader.ReadLine().TrimStart();
+                var line = await reader.ReadLineAsync();
+
+                line = line.TrimStart();
 
                 if (line.StartsWith($"<{nameTemplate}>"))
                 {

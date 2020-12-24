@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace XmlParserTest
 {
@@ -27,26 +28,26 @@ namespace XmlParserTest
             _rootNodes = new Dictionary<string, Node>();
         }
 
-        public void CollectNodes()
+        public async Task CollectNodes()
         {
             while (!_reader.EndOfStream)
             {
-                var line = _reader.ReadLine().TrimStart();
+                var line = await _reader.ReadLineAsync();
 
-                var node = _mediator.GetNode(line);
+                var node = _mediator.GetNode(line.TrimStart());
 
                 if (node == null) continue;
 
-                node.Parse(_reader, this);
+                await node.Parse(_reader, this);
             }
         }
 
         public string ToJson()
         {
             var nodes = _rootNodes
-                .Where(k => string.IsNullOrEmpty(k.Value.Parent))
-                .Select(kv => kv.Value)
-                .ToList();
+                .Where(k => !k.Value.HasParent)
+                .Select(kv => kv.Value);
+               
 
             StringBuilder result = new StringBuilder();
             
